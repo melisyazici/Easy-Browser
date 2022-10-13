@@ -8,11 +8,10 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, WKNavigationDelegate {
+class WebViewController: UIViewController, WKNavigationDelegate {
     
     var webView: WKWebView!
     var progressView: UIProgressView!
-    
     var websites = ["www.apple.com", "hackingwithswift.com"]
     
     override func loadView() {
