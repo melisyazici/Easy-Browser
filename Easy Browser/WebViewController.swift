@@ -12,7 +12,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     
     var webView: WKWebView!
     var progressView: UIProgressView!
-    var websites = ["www.apple.com", "hackingwithswift.com"]
+    var websites: [String]!
+    var currentWebsite: Int!
     
     override func loadView() {
         webView = WKWebView()
@@ -22,6 +23,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.largeTitleDisplayMode = .never
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
         
@@ -41,7 +44,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         
         
-        let url = URL(string: "https://" + websites[0])!
+        let url = URL(string: "https://" + websites[currentWebsite])!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
     }
@@ -91,6 +94,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
                 }
             }
         }
+        
 
         decisionHandler(.cancel)
 
